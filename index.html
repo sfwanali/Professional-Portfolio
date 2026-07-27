@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sfwan Ali — Full Stack Developer</title>
+<meta name="description" content="Sfwan Ali — Full Stack Developer specializing in logistics platforms, e-commerce systems, and real-time applications.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #0B1E2D;
+    --navy-2: #12293c;
+    --navy-3: #1a3550;
+    --paper: #F2EDE4;
+    --paper-dim: #e6dfd0;
+    --ink: #1B2420;
+    --brass: #C08A3E;
+    --brass-bright: #dba85a;
+    --teal: #3f8686;
+    --stamp: #a63a2f;
+    --line: rgba(242,237,228,0.14);
+    --line-paper: rgba(27,36,32,0.14);
+    --display: 'Fraunces', serif;
+    --mono: 'IBM Plex Mono', monospace;
+    --body: 'IBM Plex Sans', sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--navy);
+    color: var(--paper);
+    font-family: var(--body);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  ::selection{ background: var(--brass); color: var(--navy); }
+
+  a{ color: inherit; }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--brass-bright);
+    outline-offset: 3px;
+  }
+
+  .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+  /* ===== TOP MANIFEST STRIP ===== */
+  .topstrip{
+    border-bottom: 1px solid var(--line);
+    background: var(--navy-2);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: rgba(242,237,228,0.55);
+  }
+  .topstrip .wrap{
+    display:flex; justify-content: space-between; align-items:center;
+    padding: 9px 32px; text-transform: uppercase;
+    flex-wrap: wrap; gap: 6px;
+  }
+
+  /* ===== NAV ===== */
+  nav{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(11,30,45,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 16px 32px;
+  }
+  .brand{
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+  }
+  .brand span{ color: var(--brass-bright); }
+  .navlinks{ display:flex; gap: 28px; list-style:none; margin:0; padding:0; }
+  .navlinks a{
+    text-decoration:none;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: rgba(242,237,228,0.7);
+    transition: color .2s ease;
+    position: relative;
+  }
+  .navlinks a:hover{ color: var(--brass-bright); }
+  #navtoggle{ display:none; }
+  .navbtn{ display:none; background:none; border:1px solid var(--line); color:var(--paper); padding:8px 10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; }
+
+  @media (max-width: 760px){
+    .navlinks{
+      position:absolute; top: 100%; left:0; right:0;
+      flex-direction:column; gap:0;
+      background: var(--navy-2);
+      border-bottom: 1px solid var(--line);
+      max-height:0; overflow:hidden;
+      transition: max-height .25s ease;
+    }
+    .navlinks a{ padding: 14px 32px; display:block; border-top: 1px solid var(--line); }
+    #navtoggle:checked ~ .navlinks{ max-height: 400px; }
+    .navbtn{ display:block; }
+  }
+
+  /* ===== HERO ===== */
+  .hero{ position: relative; padding: 96px 0 64px; overflow:hidden; }
+  .hero .wrap{ display:grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items:center; }
+  .eyebrow{
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
+    color: var(--teal); text-transform: uppercase; margin-bottom: 18px;
+    display:flex; align-items:center; gap: 10px;
+  }
+  .eyebrow::before{ content:''; width: 26px; height:1px; background: var(--teal); display:inline-block; }
+  h1.title{
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(44px, 6.4vw, 84px);
+    line-height: 0.98;
+    margin: 0 0 20px;
+    letter-spacing: -0.01em;
+  }
+  h1.title em{ font-style: italic; font-weight: 500; color: var(--brass-bright); }
+  .role-line{
+    font-family: var(--mono);
+    font-size: 15px;
+    color: rgba(242,237,228,0.75);
+    letter-spacing: 0.02em;
+    margin: 0 0 28px;
+    max-width: 46ch;
+  }
+  .hero-desc{ max-width: 52ch; color: rgba(242,237,228,0.65); font-size: 15.5px; margin-bottom: 34px; }
+  .cta-row{ display:flex; gap: 14px; flex-wrap: wrap; }
+  .btn{
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.07em; text-transform: uppercase;
+    padding: 14px 22px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    border: 1px solid var(--brass); color: var(--navy); background: var(--brass-bright);
+    transition: all .2s ease;
+  }
+  .btn:hover{ background: var(--brass); transform: translateY(-1px); }
+  .btn.ghost{ background: transparent; color: var(--paper); border-color: var(--line); }
+  .btn.ghost:hover{ border-color: var(--brass-bright); color: var(--brass-bright); }
+
+  /* Stamp */
+  .stamp-wrap{ position:relative; display:flex; align-items:center; justify-content:center; height: 100%; }
+  .stamp{
+    width: min(300px, 78vw); height: min(300px, 78vw);
+    border-radius: 50%;
+    border: 3px double var(--stamp);
+    display:flex; align-items:center; justify-content:center;
+    position: relative;
+    transform: rotate(-9deg);
+    animation: stampIn .9s cubic-bezier(.2,.8,.2,1) both;
+    animation-delay: .15s;
+  }
+  @keyframes stampIn{
+    0%{ opacity:0; transform: rotate(-9deg) scale(1.4); filter: blur(1px); }
+    60%{ opacity:1; }
+    100%{ opacity:1; transform: rotate(-9deg) scale(1); filter: blur(0); }
+  }
+  .stamp::before{
+    content:'';
+    position:absolute; inset: 12px;
+    border: 1px solid var(--stamp);
+    border-radius: 50%;
+    opacity: .55;
+  }
+  .stamp-text{
+    text-align:center; color: var(--stamp); font-family: var(--mono);
+  }
+  .stamp-text .big{
+    font-family: var(--display); font-weight: 700; font-size: 26px; letter-spacing: 0.02em;
+    line-height:1.05; margin-bottom: 6px;
+  }
+  .stamp-text .small{ font-size: 10px; letter-spacing: 0.18em; text-transform:uppercase; opacity:.85; }
+  .stamp-text .rule{ width: 60px; height:1px; background: var(--stamp); margin: 8px auto; opacity: .6; }
+
+  .route-svg{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity: 0.35; }
+  .route-svg path{
+    stroke-dasharray: 6 8; stroke: var(--teal); fill:none; stroke-width:1.4;
+    stroke-dashoffset: 500; animation: dash 3.2s linear forwards;
+  }
+  @keyframes dash{ to{ stroke-dashoffset: 0; } }
+
+  @media (max-width: 860px){
+    .hero .wrap{ grid-template-columns: 1fr; }
+    .stamp-wrap{ order:-1; }
+  }
+
+  /* ===== STATS ===== */
+  .stats{ border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--navy-2); }
+  .stats .wrap{ display:grid; grid-template-columns: repeat(3,1fr); }
+  .stat{ padding: 28px 32px; border-right: 1px solid var(--line); }
+  .stat:last-child{ border-right:none; }
+  .stat .num{ font-family: var(--display); font-weight: 700; font-size: 34px; color: var(--brass-bright); }
+  .stat .lbl{ font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(242,237,228,0.55); margin-top: 4px; }
+  @media (max-width: 700px){
+    .stats .wrap{ grid-template-columns: 1fr; }
+    .stat{ border-right:none; border-bottom: 1px solid var(--line); }
+    .stat:last-child{ border-bottom:none; }
+  }
+
+  /* ===== SECTION SHELL ===== */
+  section{ padding: 88px 0; }
+  .sec-head{ margin-bottom: 44px; }
+  .sec-num{ font-family: var(--mono); font-size: 12px; color: var(--teal); letter-spacing: 0.1em; }
+  h2.sec-title{
+    font-family: var(--display); font-weight: 700; font-size: clamp(30px, 3.6vw, 44px);
+    margin: 8px 0 0; letter-spacing: -0.01em;
+  }
+
+  /* ===== ABOUT (manifest doc) ===== */
+  .about-doc{
+    background: var(--paper); color: var(--ink);
+    padding: 40px; position:relative;
+    border: 1px solid var(--paper-dim);
+  }
+  .about-doc::before{
+    content: 'FILE / 001'; position:absolute; top: 14px; right: 20px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: rgba(27,36,32,0.4);
+  }
+  .about-doc p{ font-size: 16.5px; max-width: 74ch; margin: 0 0 14px; }
+  .about-doc p:last-child{ margin-bottom:0; }
+  .about-doc .lede{ font-family: var(--display); font-style: italic; font-weight: 500; font-size: 20px; color: var(--stamp); }
+
+  /* ===== SKILLS ===== */
+  .skills-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .skill-cell{ background: var(--navy); padding: 26px 24px; }
+  .skill-cell h3{
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--brass-bright); margin: 0 0 14px; display:flex; align-items:center; gap:8px;
+  }
+  .skill-cell h3::before{ content:'▣'; font-size: 11px; }
+  .skill-cell ul{ list-style:none; margin:0; padding:0; }
+  .skill-cell li{
+    font-size: 14px; color: rgba(242,237,228,0.8); padding: 6px 0;
+    border-top: 1px dashed rgba(242,237,228,0.1);
+  }
+  .skill-cell li:first-child{ border-top:none; }
+  @media (max-width: 760px){ .skills-grid{ grid-template-columns: 1fr; } }
+
+  /* ===== EXPERIENCE (route timeline) ===== */
+  .timeline{ position:relative; padding-left: 34px; }
+  .timeline::before{
+    content:''; position:absolute; left: 5px; top:6px; bottom: 6px; width:1px;
+    background: repeating-linear-gradient(to bottom, var(--teal) 0 6px, transparent 6px 12px);
+  }
+  .stop{ position:relative; padding-bottom: 52px; }
+  .stop:last-child{ padding-bottom:0; }
+  .stop::before{
+    content:''; position:absolute; left: -34px; top: 4px; width:11px; height:11px; border-radius:50%;
+    background: var(--navy); border: 2px solid var(--brass-bright);
+  }
+  .stop-meta{ display:flex; flex-wrap:wrap; gap: 12px; align-items:baseline; margin-bottom: 6px; }
+  .stop-date{ font-family: var(--mono); font-size: 11.5px; color: var(--teal); letter-spacing: 0.06em; text-transform: uppercase; }
+  .stop-role{ font-family: var(--display); font-weight: 600; font-size: 21px; }
+  .stop-co{ font-family: var(--mono); font-size: 12.5px; color: var(--brass-bright); }
+  .stop ul{ margin: 10px 0 0; padding-left: 18px; color: rgba(242,237,228,0.68); font-size: 14.5px; }
+  .stop li{ margin-bottom: 6px; }
+
+  /* ===== PROJECTS (crates) ===== */
+  .crates{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .crate{
+    background: var(--navy-2); border: 1px solid var(--line); padding: 26px 26px 24px;
+    position: relative; transition: border-color .2s ease, transform .2s ease;
+  }
+  .crate:hover{ border-color: var(--brass); transform: translateY(-3px); }
+  .crate-label{
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform:uppercase;
+    color: rgba(242,237,228,0.4); margin-bottom: 10px; display:flex; justify-content: space-between;
+  }
+  .crate h3{ font-family: var(--display); font-weight: 600; font-size: 21px; margin: 0 0 10px; }
+  .crate p.desc{ font-size: 14px; color: rgba(242,237,228,0.65); margin: 0 0 14px; }
+  .tech-tags{ display:flex; flex-wrap:wrap; gap: 6px; margin-bottom: 14px; }
+  .tag{
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.04em;
+    border: 1px solid var(--line); padding: 4px 9px; color: rgba(242,237,228,0.7);
+  }
+  .crate ul{ margin:0; padding-left: 18px; font-size: 13.5px; color: rgba(242,237,228,0.6); }
+  .crate li{ margin-bottom: 5px; }
+  @media (max-width: 760px){ .crates{ grid-template-columns: 1fr; } }
+
+  /* ===== EDU / CERTS ===== */
+  .two-col{ display:grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .info-block h3{
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--teal); margin: 0 0 18px;
+  }
+  .edu-item{ margin-bottom: 6px; }
+  .edu-item .deg{ font-family: var(--display); font-weight: 600; font-size: 18px; }
+  .edu-item .sch{ font-family: var(--mono); font-size: 12.5px; color: rgba(242,237,228,0.6); }
+  .cert-list{ list-style:none; margin:0; padding:0; }
+  .cert-list li{
+    padding: 10px 0; border-top: 1px dashed rgba(242,237,228,0.14);
+    font-size: 14px; color: rgba(242,237,228,0.75); display:flex; gap: 10px;
+  }
+  .cert-list li:first-child{ border-top:none; }
+  .cert-list li::before{ content:'✓'; color: var(--brass-bright); font-family: var(--mono); }
+  .lang-row{ display:flex; gap: 10px; flex-wrap:wrap; margin-top: 6px; }
+  .lang-badge{
+    font-family: var(--mono); font-size: 11px; border: 1px solid var(--line); padding: 6px 12px;
+    color: rgba(242,237,228,0.7);
+  }
+  @media (max-width: 760px){ .two-col{ grid-template-columns: 1fr; gap: 48px; } }
+
+  /* ===== CONTACT / FOOTER ===== */
+  footer{ border-top: 1px solid var(--line); background: var(--navy-2); padding: 64px 0 40px; }
+  .footer-head{ text-align:center; margin-bottom: 40px; }
+  .footer-head .stamp-mini{
+    display:inline-block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+    color: var(--stamp); border: 1px solid var(--stamp); padding: 6px 16px; margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+  .footer-head h2{ font-family: var(--display); font-weight: 700; font-size: clamp(28px,4vw,46px); margin: 0 0 12px; }
+  .footer-head p{ color: rgba(242,237,228,0.6); max-width: 48ch; margin: 0 auto; }
+  .contact-grid{ display:flex; justify-content:center; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+  .contact-item{
+    font-family: var(--mono); font-size: 13px; text-decoration:none;
+    border: 1px solid var(--line); padding: 12px 20px; color: rgba(242,237,228,0.85);
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .contact-item:hover{ border-color: var(--brass-bright); color: var(--brass-bright); }
+  .fine{
+    text-align:center; margin-top: 56px; font-family: var(--mono); font-size: 11px;
+    color: rgba(242,237,228,0.35); letter-spacing: 0.05em;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topstrip">
+  <div class="wrap">
+    <span>Origin: Jhelum, PK</span>
+    <span>Manifest No. SA-2026</span>
+    <span>Status: Available for hire</span>
+  </div>
+</div>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">SFWAN<span>.</span>ALI</div>
+    <input type="checkbox" id="navtoggle" style="display:none">
+    <label class="navbtn" for="navtoggle">MENU</label>
+    <ul class="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <svg class="route-svg" viewBox="0 0 800 500" preserveAspectRatio="none">
+    <path d="M -20 420 C 150 380, 250 460, 400 380 S 650 200, 820 260"/>
+  </svg>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Full Stack Developer &mdash; Cargo of MERN</div>
+      <h1 class="title">Sfwan<br><em>Ali</em></h1>
+      <p class="role-line">Shipping platforms, e-commerce systems &amp; real-time apps &mdash; built, tracked, delivered.</p>
+      <p class="hero-desc">Full stack developer who ships production systems for automotive logistics and e-commerce &mdash; from customs clearance dashboards to live auction bidding streams &mdash; using React, Next.js, Node.js and Express.</p>
+      <div class="cta-row">
+        <a class="btn" href="#projects">View the manifest</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <div class="stamp-wrap">
+      <div class="stamp">
+        <div class="stamp-text">
+          <div class="small">Cleared For</div>
+          <div class="big">Deployment</div>
+          <div class="rule"></div>
+          <div class="small">S. Ali &middot; Full Stack</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="stats" aria-label="Career highlights">
+  <div class="wrap">
+    <div class="stat">
+      <div class="num">300+</div>
+      <div class="lbl">REST endpoints shipped</div>
+    </div>
+    <div class="stat">
+      <div class="num">210+</div>
+      <div class="lbl">Permission tokens engineered</div>
+    </div>
+    <div class="stat">
+      <div class="num">6</div>
+      <div class="lbl">Core logistics modules built</div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">01 / About</div>
+      <h2 class="sec-title">The short manifest</h2>
+    </div>
+    <div class="about-doc">
+      <p class="lede">Full stack developer building multi-tenant SaaS, shipping &amp; logistics platforms, and real-time systems.</p>
+      <p>Based in Jhelum, Pakistan, I work across the stack with React.js, Next.js, Node.js, Express.js, MySQL and MongoDB &mdash; designing scalable REST APIs, migrating legacy infrastructure to modern architectures, and wiring up cloud storage on AWS S3.</p>
+      <p>Most recently I led a small team building an automotive e-commerce and logistics platform end to end: parts catalogs, inventory, vehicle shipping, and customs clearance paperwork, all behind a granular role-based permission system and an automated CI/CD pipeline.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">02 / Skills</div>
+      <h2 class="sec-title">Cargo inventory</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cell">
+        <h3>Frontend</h3>
+        <ul>
+          <li>React.js &amp; Next.js</li>
+          <li>JavaScript (ES6+)</li>
+          <li>HTML5 &amp; CSS3</li>
+          <li>Tailwind CSS &amp; Bootstrap</li>
+        </ul>
+      </div>
+      <div class="skill-cell">
+        <h3>Backend</h3>
+        <ul>
+          <li>Node.js &amp; Express.js</li>
+          <li>REST API design</li>
+          <li>Socket.io (WebSockets)</li>
+        </ul>
+      </div>
+      <div class="skill-cell">
+        <h3>Databases</h3>
+        <ul>
+          <li>MySQL</li>
+          <li>MongoDB</li>
+          <li>PostgreSQL</li>
+        </ul>
+      </div>
+      <div class="skill-cell">
+        <h3>Cloud &amp; DevOps</h3>
+        <ul>
+          <li>AWS S3</li>
+          <li>GitHub Actions (CI/CD)</li>
+          <li>Docker, Git, Linux</li>
+          <li>Postman</li>
+        </ul>
+      </div>
+      <div class="skill-cell">
+        <h3>Concepts</h3>
+        <ul>
+          <li>JWT Auth &amp; RBAC</li>
+          <li>MVC Architecture</li>
+          <li>API Security</li>
+        </ul>
+      </div>
+      <div class="skill-cell">
+        <h3>Practice</h3>
+        <ul>
+          <li>Query optimization</li>
+          <li>Real-time bidirectional comms</li>
+          <li>Technical leadership</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">03 / Route</div>
+      <h2 class="sec-title">Career, port by port</h2>
+    </div>
+    <div class="timeline">
+
+      <div class="stop">
+        <div class="stop-meta">
+          <span class="stop-date">Jan 2026 &ndash; May 2026</span>
+        </div>
+        <div class="stop-role">Full Stack Developer &amp; Team Lead <span style="color:rgba(242,237,228,.4); font-weight:400;">(Contract)</span></div>
+        <div class="stop-co">TechInn360</div>
+        <ul>
+          <li>Built and maintained enterprise-scale automotive e-commerce and logistics platforms for an active production user base.</li>
+          <li>Engineered 300+ REST route-handlers covering parts catalogs, inventory, and vehicle shipping.</li>
+          <li>Integrated AWS S3 for shipping bills, customs paperwork, and product documentation.</li>
+          <li>Automated deployments with GitHub Actions CI/CD, cutting manual release work.</li>
+          <li>Led a team of junior interns through code review and mentorship.</li>
+          <li>Designed a permission system with 210+ permission tokens across Admin, Customer, and Driver roles.</li>
+        </ul>
+      </div>
+
+      <div class="stop">
+        <div class="stop-meta">
+          <span class="stop-date">Sep 2025 &ndash; Oct 2025</span>
+        </div>
+        <div class="stop-role">Full Stack Developer Intern</div>
+        <div class="stop-co">National Information Technology Board (NITB)</div>
+        <ul>
+          <li>Built a dynamic portfolio web application with modern frontend frameworks.</li>
+          <li>Took part in architecture discussions on system design, UI consistency, and performance.</li>
+          <li>Worked with senior engineers on testing and organizational code standards.</li>
+        </ul>
+      </div>
+
+      <div class="stop">
+        <div class="stop-meta">
+          <span class="stop-date">Feb 2025 &ndash; Jun 2025</span>
+        </div>
+        <div class="stop-role">Full Stack Developer Intern</div>
+        <div class="stop-co">TechInn360</div>
+        <ul>
+          <li>Built core frontend and backend modules for a vehicle auction platform.</li>
+          <li>Integrated internal and external REST APIs with responsive UIs.</li>
+          <li>Fixed UI and functional bugs across critical dev and QA cycles.</li>
+          <li>Ran sprints as part of Agile stand-ups and planning.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">04 / Projects</div>
+      <h2 class="sec-title">What's in the crates</h2>
+    </div>
+    <div class="crates">
+
+      <div class="crate">
+        <div class="crate-label"><span>Crate 01</span><span>TechInn360</span></div>
+        <h3>Vehicle Shipment &amp; Clearance Management System</h3>
+        <p class="desc">End-to-end shipment lifecycle tracking across pickup, ocean freight, customs clearance, insurance, and live status.</p>
+        <div class="tech-tags">
+          <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">MySQL</span><span class="tag">AWS S3</span>
+        </div>
+        <ul>
+          <li>6 core production features: pickup &amp; towing, storage, ocean freight, customs, insurance, real-time tracking</li>
+          <li>300+ REST endpoints powering admin dashboards</li>
+          <li>Role-based access for Admins, Customers, Drivers</li>
+        </ul>
+      </div>
+
+      <div class="crate">
+        <div class="crate-label"><span>Crate 02</span><span>TechInn360</span></div>
+        <h3>Auto Parts E-commerce &amp; Inventory Platform</h3>
+        <p class="desc">Inventory and sales management for searching and purchasing vehicle parts with real-time stock.</p>
+        <div class="tech-tags">
+          <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">MySQL</span>
+        </div>
+        <ul>
+          <li>Secure REST APIs for catalogs, cart logic, and order pipelines</li>
+          <li>Admin dashboards for supplier tracking &amp; sales reporting</li>
+        </ul>
+      </div>
+
+      <div class="crate">
+        <div class="crate-label"><span>Crate 03</span><span>TechInn360</span></div>
+        <h3>Vehicle Auction Management Platform</h3>
+        <p class="desc">Time-critical live bidding platform with instant state broadcasts to every connected client.</p>
+        <div class="tech-tags">
+          <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Socket.io</span><span class="tag">MySQL</span>
+        </div>
+        <ul>
+          <li>Custom WebSocket connections streaming real-time auction updates</li>
+          <li>Rapid-response fixes to keep live workflows stable</li>
+        </ul>
+      </div>
+
+      <div class="crate">
+        <div class="crate-label"><span>Crate 04</span><span>Independent</span></div>
+        <h3>Lead Generation &amp; Data Scraping Platform</h3>
+        <p class="desc">Automated lead collection pipelines parsing large datasets on a daily cycle.</p>
+        <div class="tech-tags">
+          <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">MongoDB</span>
+        </div>
+        <ul>
+          <li>Multi-tiered filtering to speed up lead discovery</li>
+          <li>Documented REST endpoints for retrieval &amp; user management</li>
+        </ul>
+      </div>
+
+      <div class="crate">
+        <div class="crate-label"><span>Crate 05</span><span>Independent</span></div>
+        <h3>Cryptocurrency Trading Simulator</h3>
+        <p class="desc">Portfolio management and simulated high-frequency trading workflows.</p>
+        <div class="tech-tags">
+          <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">MySQL</span>
+        </div>
+        <ul>
+          <li>Live market data and pricing feeds in one dashboard</li>
+          <li>Secure auth and session management</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">05 / Records</div>
+      <h2 class="sec-title">Education &amp; certifications</h2>
+    </div>
+    <div class="two-col">
+      <div class="info-block">
+        <h3>Education</h3>
+        <div class="edu-item">
+          <div class="deg">B.S. Software Engineering</div>
+          <div class="sch">Riphah International University, Islamabad &middot; 2019&ndash;2024</div>
+        </div>
+        <h3 style="margin-top:34px;">Languages</h3>
+        <div class="lang-row">
+          <span class="lang-badge">English &mdash; Fluent</span>
+          <span class="lang-badge">Urdu &mdash; Native</span>
+          <span class="lang-badge">Arabic &mdash; Basic</span>
+        </div>
+      </div>
+      <div class="info-block">
+        <h3>Certifications</h3>
+        <ul class="cert-list">
+          <li>Meta Front-End Development Capstone Project</li>
+          <li>Developing Front-End Applications with React &mdash; IBM</li>
+          <li>Developing Back-End Applications with Node.js &amp; Express &mdash; IBM</li>
+          <li>Getting Started with Git and GitHub &mdash; IBM</li>
+          <li>Software Development Processes and Methodologies &mdash; Coursera</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-head">
+      <div class="stamp-mini">End of manifest</div>
+      <h2>Let's build the next shipment.</h2>
+      <p>Open to full stack roles and freelance projects &mdash; reach out any time.</p>
+      <div class="contact-grid">
+        <a class="contact-item" href="mailto:sfwan.ali786@gmail.com">sfwan.ali786@gmail.com</a>
+        <a class="contact-item" href="tel:+92347196826">+92 347 1976826</a>
+        <a class="contact-item" href="https://linkedin.com/in/ch-sfwan-ali-21009a280" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="contact-item" href="https://github.com/sfwanali" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="fine">Jhelum, Pakistan &middot; &copy; 2026 Sfwan Ali</div>
+  </div>
+</footer>
+
+</body>
+</html>
